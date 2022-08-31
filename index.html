@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner:wght@700&family=Mukta:wght@200;300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Weather App by Wiebke Richter</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <header>
+          <h1>Weather Application</h1>
+          <p class="current-time-details" id="current-time"></p>
+          <form id="search-form">
+            <input type="text" placeholder="Change City" id="search-input" />
+            <button class="button-search">Search</button>
+            <button class="button-location" id="button-location">
+              <img
+                src="media/location_icon.png"
+                alt="location icon"
+                class="location-icon"
+              />
+            </button>
+          </form>
+          <hr />
+        </header>
+        <section>
+          <!--location-->
+          <div class="container text-center location-div">
+            <div class="row">
+              <div class="col weather-background">
+                <span class="location" id="location"></span>
+              </div>
+              <div class="col">
+                <span class="temperature" id="temperature"></span>
+                <span class="temperature">°</span>
+                <span id="unit">
+                  <a href="#" id="unit-celsius">C / </a>
+                  <a href="#" id="unit-fahrenheit">F</a>
+                </span>
+                <br />
+                <span class="time-details">
+                  Humidity <span id="humidity"></span> % / Wind
+                  <span id="wind"></span> km/h
+                </span>
+              </div>
+            </div>
+          </div>
+          <!-- forecast cards -->
+          <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+              <div class="card box-forecast">
+                <div class="row row-cols-2">
+                  <div class="col">
+                    <h3>Mon</h3>
+                    <p>
+                      23°C /
+                      <span>12°C</span>
+                    </p>
+                  </div>
+                  <div class="col">
+                    <img
+                      src="media/weather_placeholder_rain.png"
+                      alt="Placeholder weather"
+                      class="img-weather-small"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card box-forecast">
+                <div class="row row-cols-2">
+                  <div class="col">
+                    <h3>Tue</h3>
+                    <p>
+                      23°C /
+                      <span>12°C</span>
+                    </p>
+                  </div>
+                  <div class="col">
+                    <img
+                      src="media/weather_placeholder_rain.png"
+                      alt="Placeholder weather"
+                      class="img-weather-small"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card box-forecast">
+                <div class="row row-cols-2">
+                  <div class="col">
+                    <h3>Wed</h3>
+                    <p>
+                      23°C /
+                      <span>12°C</span>
+                    </p>
+                  </div>
+                  <div class="col">
+                    <img
+                      src="media/weather_placeholder.png"
+                      alt="Placeholder weather"
+                      class="img-weather-small"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card box-forecast">
+                <div class="row row-cols-2">
+                  <div class="col">
+                    <h3>Thur</h3>
+                    <p>
+                      23°C /
+                      <span>12°C</span>
+                    </p>
+                  </div>
+                  <div class="col">
+                    <img
+                      src="media/weather_placeholder.png"
+                      alt="Placeholder weather"
+                      class="img-weather-small"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card box-forecast">
+                <div class="row row-cols-2">
+                  <div class="col">
+                    <h3>Fri</h3>
+                    <p>
+                      23°C /
+                      <span>12°C</span>
+                    </p>
+                  </div>
+                  <div class="col">
+                    <img
+                      src="media/weather_placeholder.png"
+                      alt="Placeholder weather"
+                      class="img-weather-small"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card box-forecast">
+                <div class="row row-cols-2">
+                  <div class="col">
+                    <h3>Sat</h3>
+                    <p>
+                      23°C /
+                      <span>12°C</span>
+                    </p>
+                  </div>
+                  <div class="col">
+                    <img
+                      src="media/weather_placeholder.png"
+                      alt="Placeholder weather"
+                      class="img-weather-small"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <footer>Coded by Wiebke and RONAS and KIRA and PAPA Richter</footer>
+    </div>
+    <script src="src/index_new.js"></script>
+  </body>
+</html>
