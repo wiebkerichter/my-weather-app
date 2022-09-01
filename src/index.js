@@ -1,4 +1,3 @@
-// Set current time
 function setCurrentTime(time) {
   let days = [
     "Sunday",
@@ -27,68 +26,59 @@ let now = new Date();
 
 time.innerHTML = setCurrentTime(now);
 
-// Search location and set temperature
-function searchCity(event) {
-  event.preventDefault();
-  let searchInput = document.querySelector("#search-input");
-  let city = document.querySelector("#current-location");
+function displayWeatherCondition(response) {
+  document.querySelector("#location").innerHTML = response.data.name;
+  document.querySelector("#temperature").innerHTML = Math.round(
+    response.data.main.temp
+  );
 
-  if (searchInput.value) {
-    city.innerHTML = `${searchInput.value}`;
-  } else {
-    city.innerHTML = `Please search for a city`;
-  }
+  document.querySelector("#humidity").innerHTML = response.data.main.humidity;
+  document.querySelector("#wind").innerHTML = Math.round(
+    response.data.wind.speed
+  );
+  //document.querySelector("#description").innerHTML = response.data.weather[0].main;
+}
 
-  let EndpointUrl = `https://api.openweathermap.org/data/2.5/weather?`;
+function searchCity(city) {
   let apiKey = "c2d2195e44523aab9b31a24839cab246";
-  let citySelector = city.innerHTML;
-  let units = `metric`;
-  let apiUrl = `${EndpointUrl}&q=${citySelector}&units=${units}&appid=${apiKey}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayWeatherCondition);
+}
 
-  function showTemperature(response) {
-    let temperature = Math.round(response.data.main.temp);
-    let setTemperature = document.querySelector("#temperature");
-    setTemperature.innerHTML = `${temperature}`;
-  }
+function handleSubmit(event) {
+  event.preventDefault();
+  let city = document.querySelector("#search-input").value;
+  searchCity(city);
+}
 
-  axios.get(`${apiUrl}`).then(showTemperature);
+function searchLocation(position) {
+  let apiKey = "c2d2195e44523aab9b31a24839cab246";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(displayWeatherCondition);
+}
+
+function getCurrentLocation(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(searchLocation);
+}
+
+function convertToFahrenheit(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = 66;
+}
+
+function convertToCelsius(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = 19;
 }
 
 let searchForm = document.querySelector("#search-form");
-searchForm.addEventListener("submit", searchCity);
+searchForm.addEventListener("submit", handleSubmit);
 
-// Get Current Position
+let currentLocationButton = document.querySelector("#button-location");
+currentLocationButton.addEventListener("click", getCurrentLocation);
 
-function showPosition(position) {
-  let setLocation = document.querySelector("#current-location");
-  setLocation.innerHTML = `${position.coords.latitude} ${position.coords.longitude}`;
-}
-
-function getCurrentPosition() {
-  navigator.geolocation.getCurrentPosition(showPosition);
-}
-
-let button = document.querySelector("#button-location");
-button.addEventListener("click", getCurrentPosition);
-
-// Celsius to Fahrenheit
-function changeToFahrenheit(event) {
-  event.preventDefault();
-  let setTemperature = 10;
-  let temperature = document.querySelector("#temperature");
-  let temperatureFahrenheit = Math.round((setTemperature * 9) / 5 + 32);
-  temperature.innerHTML = `${temperatureFahrenheit}`;
-}
-
-function changeToCelsius(event) {
-  event.preventDefault();
-  let setTemperature = 10;
-  let temperature = document.querySelector("#temperature");
-  temperature.innerHTML = `${setTemperature}`;
-}
-
-let currentUnitFahrenheit = document.querySelector("#unit-fahrenheit");
-currentUnitFahrenheit.addEventListener("click", changeToFahrenheit);
-
-let currentUnitCelsius = document.querySelector("#unit-celsius");
-currentUnitCelsius.addEventListener("click", changeToCelsius);
+searchCity("Palma de Mallorca");
