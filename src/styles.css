@@ -46,10 +46,10 @@ a {
 .wrapper {
   border: 1px solid #dad7d7;
   border-radius: 20px;
-  max-width: 600px;
+  max-width: 800px;
   margin: 40px auto 0;
   padding: 20px;
-  background: #fff;
+  background: rgba(253, 252, 252, 0.4);
 }
 
 .current-time-details {
@@ -77,19 +77,9 @@ a {
   margin: 0 0 20px 0;
 }
 
-.weather-background {
-  background-image: url("../media/background-rain.jpg");
-  width: 100%;
-  height: 100px;
-  object-fit: cover;
-  object-position: top center;
-  opacity: 0.9;
-  border-radius: 7px;
-}
-
 .location {
   font-family: "Edu VIC WA NT Beginner", cursive;
-  font-size: 32px;
+  font-size: 50px;
 }
 
 .temperature {
@@ -106,4 +96,13 @@ a {
 .box-forecast {
   padding: 10px;
   text-align: center;
+}
+
+.units {
+  position: relative;
+  top: -20px;
+}
+
+.conditions {
+  text-align: left;
 }

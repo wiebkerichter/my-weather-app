@@ -30,7 +30,7 @@
           <h1>Weather Application</h1>
           <p class="current-time-details" id="current-time"></p>
           <form id="search-form">
-            <input type="text" placeholder="Change City" id="search-input" />
+            <input type="text" placeholder="Type a city..." id="search-input" />
             <button class="button-search">Search</button>
             <button class="button-location" id="button-location">
               <img
@@ -46,25 +46,26 @@
           <!--location-->
           <div class="container text-center location-div">
             <div class="row">
-              <div class="col weather-background">
+              <div class="col">
                 <span class="location" id="location"></span>
               </div>
               <div class="col">
-                <span class="temperature" id="temperature"></span>
-                <span class="temperature">°</span>
-                <span id="unit">
-                  <a href="#" id="unit-celsius">C / </a>
-                  <a href="#" id="unit-fahrenheit">F</a>
-                </span>
+                <div class="d-flex weather-temperature">
+                  <img src="" alt="Clear" id="icon" />
+                  <div>
+                    <strong class="temperature" id="temperature"></strong
+                    ><span class="units"> °C</span>
+                  </div>
+                </div>
                 <br />
-                <span class="time-details">
+                <div class="conditions">
                   Humidity <span id="humidity"></span> % / Wind
                   <span id="wind"></span> km/h
-                </span>
+                </div>
               </div>
             </div>
           </div>
-          <!-- forecast cards -->
+          <!-- forecast cards 
           <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col">
               <div class="card box-forecast">
@@ -187,6 +188,7 @@
               </div>
             </div>
           </div>
+          -->
         </section>
       </div>
       <footer>
