@@ -26,23 +26,34 @@ let now = new Date();
 
 time.innerHTML = setCurrentTime(now);
 
-function displayWeatherCondition(response) {
+function displayWeatherConditions(response) {
+  console.log(response.data);
+
   document.querySelector("#location").innerHTML = response.data.name;
   document.querySelector("#temperature").innerHTML = Math.round(
     response.data.main.temp
   );
-
-  document.querySelector("#humidity").innerHTML = response.data.main.humidity;
+  document.querySelector("#humidity").innerHTML = Math.round(
+    response.data.main.humidity
+  );
   document.querySelector("#wind").innerHTML = Math.round(
     response.data.wind.speed
   );
-  //document.querySelector("#description").innerHTML = response.data.weather[0].main;
+  document
+    .querySelector("#icon")
+    .setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
+  document
+    .querySelector("#icon")
+    .setAttribute("alt", `${response.data.weather[0].description}`);
 }
 
 function searchCity(city) {
   let apiKey = "c2d2195e44523aab9b31a24839cab246";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayWeatherCondition);
+  axios.get(apiUrl).then(displayWeatherConditions);
 
   console.log(apiUrl);
 }
@@ -57,24 +68,12 @@ function searchLocation(position) {
   let apiKey = "c2d2195e44523aab9b31a24839cab246";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
 
-  axios.get(apiUrl).then(displayWeatherCondition);
+  axios.get(apiUrl).then(displayWeatherConditions);
 }
 
 function getCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(searchLocation);
-}
-
-function convertToFahrenheit(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = 66;
-}
-
-function convertToCelsius(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = 19;
 }
 
 let searchForm = document.querySelector("#search-form");

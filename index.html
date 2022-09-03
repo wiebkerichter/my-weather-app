@@ -46,25 +46,26 @@
           <!--location-->
           <div class="container text-center location-div">
             <div class="row">
-              <div class="col">
+              <div class="col-8">
                 <span class="location" id="location"></span>
               </div>
-              <div class="col">
+              <div class="col-4 conditions-div">
                 <div class="d-flex weather-temperature">
-                  <img src="" alt="Clear" id="icon" />
-                  <div>
+                  <img src="" alt="" class="weather-icon" id="icon" />
+                  <div class="temperature-div">
                     <strong class="temperature" id="temperature"></strong
                     ><span class="units"> °C</span>
                   </div>
                 </div>
                 <br />
                 <div class="conditions">
-                  Humidity <span id="humidity"></span> % / Wind
+                  Humidity <span id="humidity"></span> % | Wind
                   <span id="wind"></span> km/h
                 </div>
               </div>
             </div>
           </div>
+          <hr />
           <!-- forecast cards 
           <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col">

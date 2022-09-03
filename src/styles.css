@@ -103,6 +103,7 @@ a {
   top: -20px;
 }
 
-.conditions {
-  text-align: left;
+.weather-icon {
+  position: relative;
+  top: -10px;
 }
