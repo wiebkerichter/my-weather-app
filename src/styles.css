@@ -107,3 +107,7 @@ a {
   position: relative;
   top: -10px;
 }
+
+.conditions {
+  font-size: 13px;
+}
