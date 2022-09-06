@@ -51,6 +51,31 @@ function displayWeatherConditions(response) {
     .setAttribute("alt", `${response.data.weather[0].description}`);
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+  let days = ["Wed", "Thur", "Fri", "Sat", "Sun", "Mon"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col text-center">
+  <h3>${day}</h3>
+  <img
+    src="media/weather_placeholder_rain.png"
+    alt="Placeholder weather"
+    class="img-weather-small"
+  />
+  <p>
+    <strong>23°</strong>
+    12°
+  </p>
+</div>`;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function searchCity(city) {
   let apiKey = "c2d2195e44523aab9b31a24839cab246";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -103,3 +128,4 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 searchCity("Palma de Mallorca");
+displayForecast();
