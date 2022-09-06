@@ -27,8 +27,6 @@ let now = new Date();
 time.innerHTML = setCurrentTime(now);
 
 function getForecast(coordinates) {
-  console.log(coordinates);
-
   let apiKey = "c2d2195e44523aab9b31a24839cab246";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
@@ -61,28 +59,39 @@ function displayWeatherConditions(response) {
   getForecast(response.data.coord);
 }
 
-function displayForecast(response) {
-  console.log(response.data.daily);
-  let forecastElement = document.querySelector("#forecast");
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
+  return days[day];
+}
+
+function displayForecast(response) {
+  let forecast = response.data.daily;
+
+  let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
-  let days = ["Wed", "Thur", "Fri", "Sat", "Sun", "Mon"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col text-center">
-  <h3>${day}</h3>
+
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 7) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col text-center">
+  <h3>${formatDay(forecastDay.dt)}</h3>
   <img
-    src="media/weather_placeholder_rain.png"
-    alt="Placeholder weather"
+    src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png"
+    alt=""
     class="img-weather-small"
   />
   <p>
-    <strong>23°</strong>
-    12°
+    <strong>${Math.round(forecastDay.temp.max)}°</strong>
+    ${Math.round(forecastDay.temp.min)}°
   </p>
 </div>`;
+    }
   });
+
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
