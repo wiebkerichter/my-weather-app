@@ -77,7 +77,7 @@ function displayForecast(response) {
     if (index < 7) {
       forecastHTML =
         forecastHTML +
-        `<div class="col text-center">
+        `<div class="col text-center forecast-div">
   <h3>${formatDay(forecastDay.dt)}</h3>
   <img
     src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png"
